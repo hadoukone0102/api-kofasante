@@ -60,6 +60,20 @@ class AuthController extends Controller
         ], 201);
 
     }
+
+    /**
+     *
+     * api pour recupérer la liste de tous les utilisateur de kafa mobile
+     *
+     */
+    public function userAll(){
+        $allUsers = Utilisateur::all();
+        return response()->json([
+            'status'=>1,
+            'message'=>'liste des Utilisateurs récupérer avec succès',
+            'type'=>$allUsers
+        ], 200);
+    }
 // mis à jour d'un utilisateur
     public function update(Request $request, $id)
     {

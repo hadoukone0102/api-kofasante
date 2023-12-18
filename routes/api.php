@@ -1,8 +1,13 @@
 <?php
 
+use App\Http\Controllers\Api\AdministrateurController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\MediaTechController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 
 /*
@@ -29,17 +34,78 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 |
 */
 
-// Inscription et Connexion
+// Inscription et Connexion utilisateur
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
+// Inscription et connexion d'un administrateur
+Route::post('/admin-register', [AdministrateurController::class, 'register']);
+Route::post('/admin-login', [AdministrateurController::class, 'login']);
 // Informations de l'Utilisateur (Protégé par l'authentification)
-Route::middleware('auth:sanctum')->group(function () {
+
+Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+    /**
+     * ####################~~~~~~~~~~~~ for back-office ~~~~~~~~~~~~~~~~~###############
+     * Administrateur
+     * login
+     * register
+     * profils
+     * logout
+     * update
+     * types get and post
+     * get all admin
+     */
+
+    Route::post('type-post', [AdministrateurController::class,'typePost']);
+    Route::get('admin-profils', [AdministrateurController::class,'adminProfils']);
+    Route::post('admin-logout', [AdministrateurController::class,'adminLogout']);
+    Route::put('/admin/{id}', [AdministrateurController::class, 'adminUpdate']);
+
+     /**
+     * ####################~~~~~~~~~~~~ for user in mobile app of kofasante ~~~~~~~~~~~~~~~~~###############
+     * Utilisateur
+     * login
+     * register
+     * profils
+     * logout
+     * update
+     * get all users
+     */
+
+    Route::get('/all-user', [AuthController::class, 'userAll']);
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
-    // Autres routes protégées
-});
+     /**
+    *
+     * ####################~~~~~~~~~~~~ Gestion du second module ~~~~~~~~~~~~~~~~~###############
+     *
+     *
+     * Asctuce et Conseil
+     * CreateAsctuceOrConseil
+     * deleteA&C
+     * updateA&C
+     * ListeCreation
+     *
+     *
+     */
+    Route::post('media',[MediaTechController::class,'mediaCreate']);
+    Route::get('media-liste',[MediaTechController::class,'mediaLists']);
+    Route::delete('media-delete/{id}',[MediaTechController::class,'mediaDelete']);
+    Route::put('media-update/{id}',[MediaTechController::class,'mediaUpdate']);
+    /**
+     * ####################~~~~~~~~~~~~ Gestion du second module ~~~~~~~~~~~~~~~~~###############
+     * Categories
+     * create
+     * listes
+     * delete
+     * update
+     *
+     */
+    Route::post('categorie/create',[MediaTechController::class,'categoriePost']);
+    Route::delete('categorie/delete/{id}',[MediaTechController::class,'categorieDelete']);
+    Route::put('categorie/update/{id}',[MediaTechController::class,'categorieUpdate']);
+
+});// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
 // Réinitialisation du Mot de Passe
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
@@ -55,3 +121,9 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
  * http://localhost:8000/api/reset-password  =>POUR RENITIALISER LE MOT DE PASSE
  *
  */
+
+ //################## ############################## Possiblité de voir sans etre forcement connecté #######################
+
+ Route::get('categorie/get',[MediaTechController::class,'categorieGet']);
+ Route::get('type-get', [AdministrateurController::class,'typeGet']);
+ Route::get('admin-get', [AdministrateurController::class,'adminGet']);
