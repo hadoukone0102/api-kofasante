@@ -29,13 +29,13 @@ class MediaTechController extends Controller
 
         $filename ="";
         if($request->hasFile('media')){
-            $filename =$request->file('media')->store('medias','public');
+            $filename = $request->file('media')->store('medias','public');
         }else{
-            $filename=NULL;
+            $filename = null;
         }
 
         $media = new mediaTech();
-        $media->id_admin = auth()->user()->id;
+        $media->id_admin = 1;
         $media->titre = $request->input('titre');
         $media->categorie = $request->input('categorie');
         $media->media = $filename;
@@ -53,22 +53,6 @@ class MediaTechController extends Controller
                 'message' => 'Impossible d\' Enregistré'
             ], 401);
         }
-
-     }
-
-     /**
-      *
-      * Apipour récupérer la liste des publication
-      *
-      */
-
-      public function mediaLists(){
-        $allPub = mediaTech::orderBy('id','DESC')->get();
-        return response()->json([
-            'status'=>1,
-            'message'=>'liste des publication récupérer avec succès',
-            'type'=>$allPub
-        ], 200);
     }
 
     /**
