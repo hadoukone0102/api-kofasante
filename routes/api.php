@@ -71,7 +71,7 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
      * get all users
      */
 
-    Route::get('/all-user', [AuthController::class, 'userAll']);
+
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -127,6 +127,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
  Route::get('categorie/get',[MediaTechController::class,'categorieGet']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
  Route::get('admin-get', [AdministrateurController::class,'adminGet']);
+ Route::get('/all-user', [AuthController::class, 'userAll']);
 
  Route::post('media',[MediaTechController::class,'mediaCreate']);
  Route::get('media-liste',[MediaTechController::class,'mediaLists']);
