@@ -54,6 +54,18 @@ class MediaTechController extends Controller
             ], 401);
         }
     }
+    /**
+     * api pour afficher liste de toute les publications de kofa
+     */
+
+     public function mediaLists(){
+        $pub = mediaTech::all();
+        return response()->json([
+            'status'=>1,
+            'message'=>'liste des administrateurs récupérer avec succès',
+            'pub'=>$pub
+        ], 200);
+     }
 
     /**
      *
