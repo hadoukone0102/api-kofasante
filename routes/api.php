@@ -1,10 +1,22 @@
 <?php
 
+use App\Http\Controllers\Api\AbonnementController;
 use App\Http\Controllers\Api\AdministrateurController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\DocumentsController;
+use App\Http\Controllers\Api\MedecineEnLigneController;
 use App\Http\Controllers\Api\MediaTechController;
+use App\Http\Controllers\Api\RenseignerController;
+use App\Http\Controllers\Api\VisitesController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
+
+
+
+
 
 
 
@@ -43,6 +55,9 @@ Route::post('/admin-login', [AdministrateurController::class, 'login']);
 // Informations de l'Utilisateur (Protégé par l'authentification)
 
 Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
+
+
+
     /**
      * ####################~~~~~~~~~~~~ for back-office ~~~~~~~~~~~~~~~~~###############
      * Administrateur
@@ -70,7 +85,6 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
      * update
      * get all users
      */
-
 
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
@@ -123,6 +137,20 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
  */
 
  //################## ############################## Possiblité de voir sans etre forcement connecté #######################
+
+    // services
+    Route::apiResource('services', ServiceController::class);
+        // Abonnement
+        Route::apiResource('abonnement', AbonnementController::class);
+        // Documents
+        Route::apiResource('document', DocumentsController::class);
+        // Renseigner
+        Route::apiResource('medecine', MedecineEnLigneController::class);
+        // Renseigner
+        Route::apiResource('renseigner', RenseignerController::class);
+        // visite
+        Route::apiResource('visite', VisitesController::class);
+
 
  Route::get('categorie/get',[MediaTechController::class,'categorieGet']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
