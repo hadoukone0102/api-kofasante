@@ -14,7 +14,7 @@ class RenseignerController extends Controller
     public function index()
     {
         //
-        $services = renseigner::orderBy('created_at', 'desc')->get();
+        $services = renseigner::orderBy('created_at', 'desc')->paginate(25);
         return response()->json(
             [
                 'message' =>"toutes les donnée recupérer",

@@ -14,7 +14,7 @@ class DocumentsController extends Controller
     public function index()
     {
         //
-        $services = documents::orderBy('created_at', 'desc')->get();
+        $services = documents::orderBy('created_at', 'desc')->paginate(25);
         return response()->json(
             [
                 'message' =>"toutes les donnée recupérer",

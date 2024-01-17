@@ -59,7 +59,7 @@ class MediaTechController extends Controller
      */
 
      public function mediaLists(){
-        $pub = mediaTech::orderBy('created_at', 'desc')->get();
+        $pub = mediaTech::orderBy('created_at', 'desc')->paginate(50);
         return response()->json([
             'status'=>1,
             'message'=>'liste des publications récupérer avec succès',

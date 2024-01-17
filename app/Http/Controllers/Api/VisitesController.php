@@ -14,7 +14,7 @@ class VisitesController extends Controller
     public function index()
     {
         //
-        $services = visites::orderBy('created_at', 'desc')->get();
+        $services = visites::orderBy('created_at', 'desc')->paginate(25);
         return response()->json([
             'message' =>"toutes les donnée recupérer",
             'data' => $services
