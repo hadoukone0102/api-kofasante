@@ -59,13 +59,47 @@ class MediaTechController extends Controller
      */
 
      public function mediaLists(){
-        $pub = mediaTech::all();
+        $pub = mediaTech::orderBy('created_at', 'desc')->get();
         return response()->json([
             'status'=>1,
-            'message'=>'liste des administrateurs récupérer avec succès',
+            'message'=>'liste des publications récupérer avec succès',
             'pub'=>$pub
         ], 200);
      }
+
+     public function astucesCate()
+     {
+         $pub = mediaTech::where('categorie', 'Actuces')->orderBy('created_at', 'desc')->get();
+
+         return response()->json([
+             'message' => "Toutes les astuces de la catégorie 'Actuces' récupérées",
+             'data' => $pub
+         ]);
+     }
+
+     public function conseilsCate()
+     {
+         $pub = mediaTech::where('categorie', 'Conseils')->orderBy('created_at', 'desc')->get();
+
+         return response()->json([
+             'message' => "Toutes les astuces de la catégorie 'Conseils' récupérées",
+             'data' => $pub
+         ]);
+     }
+
+     public function actualiteCate()
+     {
+         $pub = mediaTech::where('categorie', 'Actualité')->orderBy('created_at', 'desc')->get();
+
+         return response()->json([
+             'message' => "Toutes les astuces de la catégorie 'Actualité' récupérées",
+             'data' => $pub
+         ]);
+     }
+
+
+
+
 
     /**
      *

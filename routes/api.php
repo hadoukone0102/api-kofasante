@@ -15,13 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 
 
-
-
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -56,8 +49,6 @@ Route::post('/admin-login', [AdministrateurController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ //
 
-
-
     /**
      * ####################~~~~~~~~~~~~ for back-office ~~~~~~~~~~~~~~~~~###############
      * Administrateur
@@ -89,6 +80,7 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
+
      /**
     *
      * ####################~~~~~~~~~~~~ Gestion du second module ~~~~~~~~~~~~~~~~~###############
@@ -156,6 +148,10 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
  Route::get('admin-get', [AdministrateurController::class,'adminGet']);
  Route::get('/all-user', [AuthController::class, 'userAll']);
-
+    // liste des publications
  Route::post('media',[MediaTechController::class,'mediaCreate']);
  Route::get('media-liste',[MediaTechController::class,'mediaLists']);
+        // liste des publications par categorie
+        Route::get('media-liste/astuces',[MediaTechController::class,'astucesCate']);
+        Route::get('media-liste/conseils',[MediaTechController::class,'conseilsCate']);
+        Route::get('media-liste/actualite',[MediaTechController::class,'actualiteCate']);
