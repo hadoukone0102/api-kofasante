@@ -14,7 +14,7 @@ class AbonnementController extends Controller
      */
     public function index()
     {
-        $services = abonnements::orderBy('created_at', 'desc')->get();
+        $services = abonnements::orderBy('created_at', 'desc')->paginate(25);
 
         return response()->json([
             'message' => "Toutes les données récupérées",
@@ -32,7 +32,8 @@ class AbonnementController extends Controller
         return response()->json([
             'message'=> "Enregistrer avec succès",
             'data'=>$service
-        ], 201);    }
+        ], 201);
+    }
 
     /**
      * Display the specified resource.
