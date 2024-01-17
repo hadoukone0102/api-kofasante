@@ -98,9 +98,6 @@ class MediaTechController extends Controller
      }
 
 
-
-
-
     /**
      *
      * api pour supprimer un publication

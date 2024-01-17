@@ -14,7 +14,12 @@ class ServiceController extends Controller
     {
         //
         $services = Service::all();
-        return response()->json($services);
+        return response()->json(
+            [
+                'message' =>"toutes les donnée recupérer",
+                'data' => $services
+            ]
+        );
     }
 
     /**
@@ -45,7 +50,10 @@ class ServiceController extends Controller
         //
         $service = Service::findOrFail($id);
         $service->update($request->only('prix'));
-        return response()->json($service, 200);
+        return response()->json([
+            'message' =>"Mise à jour effectuer avec succès",
+            'data'=>$service
+        ], 200);
     }
 
     /**
