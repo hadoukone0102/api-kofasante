@@ -1,0 +1,53 @@
+
+
+Documents
+
+
+    "document",
+    "autreTypeDocs",
+    "rdv",
+    "autreTypeRDV",
+    "dateRdv",
+
+Medecine en ligne
+
+    'consultant',
+    'tyeConsultation',
+    'dateTot',
+    'dateTard',
+
+
+Renseignement
+
+   // 'nom','prenom','contact','email','details','type','couts'
+
+visites
+
+    'services','typeServices',
+
+Abonnement
+
+    'services','typeServices','forfait','nombreVisite'
+
+--------------------------------- JE RETIEN ------------------------------------
+
+    'nom',
+    'prenom',
+    'contact',
+    'email',
+    'details',
+    'type',
+    'couts',
+    "document",
+    "autreTypeDocs",
+    "rdv",
+    "autreTypeRDV",
+    "dateRdv",
+    'consultant',
+    'tyeConsultation',
+    'dateTot',
+    'dateTard',
+    'services',
+    'typeServices',
+    'forfait',
+    'nombreVisite'

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AbonnementController;
 use App\Http\Controllers\Api\AdministrateurController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DocumentsController;
+use App\Http\Controllers\Api\FacturationController;
 use App\Http\Controllers\Api\MedecineEnLigneController;
 use App\Http\Controllers\Api\MediaTechController;
 use App\Http\Controllers\Api\RenseignerController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Api\VisitesController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -155,3 +157,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
         Route::get('media-liste/astuces',[MediaTechController::class,'astucesCate']);
         Route::get('media-liste/conseils',[MediaTechController::class,'conseilsCate']);
         Route::get('media-liste/actualite',[MediaTechController::class,'actualiteCate']);
+// Facturation
+Route::post('/Facture', [FacturationController::class, 'store']);
+Route::get('/Facture/liste', [FacturationController::class, 'index']);
+Route::get('/Facture/personnel', [FacturationController::class, 'personnel']);
