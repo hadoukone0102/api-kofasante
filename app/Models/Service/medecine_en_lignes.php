@@ -22,6 +22,7 @@ class medecine_en_lignes extends Model
     'dateTard',
     'details',
     'type',
-    'couts'
+    'couts',
+    'status'
     ];
 }

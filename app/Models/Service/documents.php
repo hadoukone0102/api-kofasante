@@ -24,7 +24,8 @@ class documents extends Model
     "typeServices",
     "details",
     "type",
-    "couts"
+    "couts",
+    "status"
 
     ];
 }

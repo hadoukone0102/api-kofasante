@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('details');
             $table->string('type');
             $table->integer('couts');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

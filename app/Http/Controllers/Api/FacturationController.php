@@ -95,6 +95,13 @@ class FacturationController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $models = Facturation::findOrFail($id);
+        $models->update($request->only('status'));
+        return response()->json(
+            [
+             'message'=>'Modifier avec succès',
+             'data'=>$models
+            ], 200);
     }
 
     /**

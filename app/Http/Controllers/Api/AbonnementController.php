@@ -53,12 +53,12 @@ class AbonnementController extends Controller
     {
         //
         $service = abonnements::findOrFail($id);
-        $service->update($request->only('prix'));
-        return response()->json([
-            'message' =>"toutes les donnée recupérer",
-          'data' => $service
-
-        ], 200);
+        $service->update($request->only('status'));
+        return response()->json(
+            [
+             'message'=>'Modifier avec succès',
+             'data'=>$service
+            ], 200);
     }
 
     /**

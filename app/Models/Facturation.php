@@ -10,12 +10,13 @@ class Facturation extends Model
     use HasFactory;
 
     protected $table = "facturations";
-    
+
     protected $fillable = [
         'nom',
         'prenom',
         'contact',
         'email',
+        'status',
         'details',
         'type',
         'couts',

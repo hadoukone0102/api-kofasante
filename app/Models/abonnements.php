@@ -23,7 +23,7 @@ class abonnements extends Model
     'type',
     'couts',
     'forfait',
-    'nombreVisite'
-
+    'nombreVisite',
+    'status'
     ];
 }

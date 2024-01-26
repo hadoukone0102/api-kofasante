@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('contact');
             $table->string('email');
+            $table->boolean('status');
             $table->string('details')->nullable();
             $table->string('type')->nullable();
             $table->integer('couts')->nullable();

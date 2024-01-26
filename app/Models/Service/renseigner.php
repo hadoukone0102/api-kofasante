@@ -12,5 +12,5 @@ class renseigner extends Model
 
     protected $table = "renseigners";
 
-    protected $fillable = ['nom','prenom','contact','email','details','type','couts'];
+    protected $fillable = ['nom','prenom','contact','email','details','type','couts','status'];
 }

@@ -162,3 +162,5 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::post('/Facture', [FacturationController::class, 'store']);
 Route::get('/Facture/liste', [FacturationController::class, 'index']);
 Route::post('/Facture/personnel', [FacturationController::class, 'personnel']);
+Route::put('/Facture/update/{id}', [FacturationController::class, 'update']);
+

@@ -53,8 +53,12 @@ class RenseignerController extends Controller
     {
         //
         $service = renseigner::findOrFail($id);
-        $service->update($request->only('prix'));
-        return response()->json($service, 200);
+        $service->update($request->only('status'));
+        return response()->json(
+            [
+             'message'=>'Modifier avec succès',
+             'data'=>$service
+            ], 200);
     }
 
     /**
