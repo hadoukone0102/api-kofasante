@@ -78,7 +78,8 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
      * update
      * get all users
      */
-
+        // il faut être connecté pour voir ta facture
+    Route::get('/Facture/my', [FacturationController::class, 'MyFacture']);
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);

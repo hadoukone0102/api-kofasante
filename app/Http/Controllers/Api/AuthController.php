@@ -123,7 +123,7 @@ class AuthController extends Controller
         if(!$user){
             return response()->json([
                 'status'=>0,
-                'message'=>'utilisateur existe déja ',
+                'message'=>'Une erreur est survenu lors de la connexion ',
                 'user'=>$user,
                 ],404);
         }else{

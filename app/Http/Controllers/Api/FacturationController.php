@@ -67,6 +67,20 @@ class FacturationController extends Controller
     }
 
 
+    public function MyFacture (Request $request){
+        $models = Facturation::where([
+            'nom' => auth()->user()->nom,
+            'prenom' => auth()->user()->prenom,
+            'contact' =>auth()->user()->contact,
+            'email' => auth()->user()->email,
+        ])->orderBy('created_at', 'desc')->get();
+
+        return response()->json([
+            'message' => "la facture de l'utilisateur connecté",
+            'data' => $models,
+        ], 200);
+    }
+
     /**
      * Display the specified resource.
      */
