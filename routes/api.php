@@ -7,11 +7,15 @@ use App\Http\Controllers\Api\DocumentsController;
 use App\Http\Controllers\Api\FacturationController;
 use App\Http\Controllers\Api\MedecineEnLigneController;
 use App\Http\Controllers\Api\MediaTechController;
+use App\Http\Controllers\Api\PaiementsController;
+use App\Http\Controllers\Api\RappelController;
 use App\Http\Controllers\Api\RenseignerController;
 use App\Http\Controllers\Api\VisitesController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -80,6 +84,8 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
      */
         // il faut être connecté pour voir ta facture
     Route::get('/Facture/my', [FacturationController::class, 'MyFacture']);
+        // pour voire ces rappel l'utilisateur doit etre connecté
+            Route::get('rappels/my', [RappelController::class,'myRappel']);
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -145,7 +151,10 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
         Route::apiResource('renseigner', RenseignerController::class);
         // visite
         Route::apiResource('visite', VisitesController::class);
-
+            // Rappels
+            Route::apiResource('rappels', RappelController::class);
+                // Paiement
+                Route::apiResource('paiement',PaiementsController::class);
 
  Route::get('categorie/get',[MediaTechController::class,'categorieGet']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
