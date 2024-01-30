@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('email');
             $table->string('contact');
             $table->string('titre');
-            $table->date('date');
-            $table->time('heure');
-            $table->string('jour');
+            $table->integer('heure');
+            $table->integer('minutes');
+            $table->integer('jour');
             $table->timestamps();
         });
     }

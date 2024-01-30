@@ -18,8 +18,8 @@ class rappel extends Model
         'email',
         'contact',
         'titre',
-        'date',
         'heure',
+        'minutes',
         'jour'
     ];
 }
