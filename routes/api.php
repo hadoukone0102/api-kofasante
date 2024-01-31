@@ -13,9 +13,11 @@ use App\Http\Controllers\Api\rapportDataController;
 use App\Http\Controllers\Api\RenseignerController;
 use App\Http\Controllers\Api\SendrapportController;
 use App\Http\Controllers\Api\VisitesController;
+use App\Http\Controllers\lectureController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -94,6 +96,8 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
                 Route::get('analyse/my',[rapportDataController::class,'myAnalyse']);
                     // l'utilisateur doit être connecté avant de pouvoir voir la liste des rapport envover
                     Route::get('Rapports/my',[SendrapportController::class,'myRapport']);
+                        // l'utilisateur doit être connecté avant de pouvoir voir la liste des rapport envover
+                        Route::get('lecture/my',[lectureController::class,'myLecture']);
 
     Route::get('/profils', [AuthController::class, 'profils']);
     Route::put('/update/{id}', [AuthController::class, 'update']);
@@ -168,6 +172,8 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
                     Route::apiResource('analyse',rapportDataController::class);
                          // Saisie de donnée pour les rapports
                         Route::apiResource('Rapports',SendrapportController::class);
+                        // Interpretation des données saisire
+                        Route::apiResource('lecture',lectureController::class);
 
  Route::get('categorie/get',[MediaTechController::class,'categorieGet']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
