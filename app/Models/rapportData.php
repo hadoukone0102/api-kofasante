@@ -16,6 +16,7 @@ class rapportData extends Model
         'prenom',
         'email',
         'contact',
+        'type',
         'droite',
         'gauche',
         'taille',

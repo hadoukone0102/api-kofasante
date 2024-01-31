@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('email');
             $table->string('contact');
-            $table->string('droite');
-            $table->string('gauche');
-            $table->string('poids');
-            $table->string('taille');
-            $table->string('glycemie');
+            $table->string('type');
+            $table->string('droite')->nullable();;
+            $table->string('gauche')->nullable();;
+            $table->string('poids')->nullable();;
+            $table->string('taille')->nullable();;
+            $table->string('glycemie')->nullable();;
             $table->timestamps();
         });
     }
