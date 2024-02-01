@@ -118,8 +118,8 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
      */
 
 
-    Route::delete('media-delete/{id}',[MediaTechController::class,'mediaDelete']);
-    Route::put('media-update/{id}',[MediaTechController::class,'mediaUpdate']);
+    //Route::put('media-update/{id}',[MediaTechController::class,'mediaUpdate']);
+
     /**
      * ####################~~~~~~~~~~~~ Gestion du second module ~~~~~~~~~~~~~~~~~###############
      * Categories
@@ -182,6 +182,9 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     // liste des publications
  Route::post('media',[MediaTechController::class,'mediaCreate']);
  Route::get('media-liste',[MediaTechController::class,'mediaLists']);
+ //Route::put('media-update/{id}',[MediaTechController::class,'mediaUpdate']);
+ Route::delete('media-delete/{id}',[MediaTechController::class,'mediaDelete']);
+
         // liste des publications par categorie
         Route::get('media-liste/astuces',[MediaTechController::class,'astucesCate']);
         Route::get('media-liste/conseils',[MediaTechController::class,'conseilsCate']);
