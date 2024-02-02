@@ -24,9 +24,9 @@ class AdministrateurController extends Controller
         ]);
 
         // Check if the request is authorized to create a "Super Admin"
-        if ($request->type === 'Super' && !$this->isAuthorizedToCreateSuperAdmin()) {
-            return response()->json(['message' => 'Vous n\'êtes pas autorisé à créer un Super Admin.'], 403);
-        }
+        // if ($request->type === 'Super' && !$this->isAuthorizedToCreateSuperAdmin()) {
+        //     return response()->json(['message' => 'Vous n\'êtes pas autorisé à créer un Super Admin.'], 403);
+        // }
 
         // Check if an administrator with the same contact already exists
         if (administrateur::where('contact', $request->contact)->exists()) {
@@ -97,7 +97,7 @@ class AdministrateurController extends Controller
             }else{
                 return response()->json([
                     'status'=>0,
-                    'message'=>'mot de passe ou e-mail incorecte',
+                    'message'=>'mot de passe ou contact incorecte',
                 ], 404);
             }
         }
