@@ -189,6 +189,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
         Route::get('media-liste/astuces',[MediaTechController::class,'astucesCate']);
         Route::get('media-liste/conseils',[MediaTechController::class,'conseilsCate']);
         Route::get('media-liste/actualite',[MediaTechController::class,'actualiteCate']);
+        Route::get('media-liste/bilan',[MediaTechController::class,'MediaBilan']);
 // Facturation
 Route::post('/Facture', [FacturationController::class, 'store']);
 Route::get('/Facture/liste', [FacturationController::class, 'index']);

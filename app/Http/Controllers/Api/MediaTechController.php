@@ -4,8 +4,15 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 
+use App\Models\abonnements;
+use App\Models\administrateur;
 use App\Models\Categorie;
 use App\Models\mediaTech;
+use App\Models\Service\documents;
+use App\Models\Service\medecine_en_lignes;
+use App\Models\Service\renseigner;
+use App\Models\Service\visites;
+use App\Models\Utilisateur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -54,6 +61,43 @@ class MediaTechController extends Controller
             ], 401);
         }
     }
+    /**
+     * api pour afficher liste de tous faire le bilan
+     */
+
+     public function MediaBilan() {
+        $pub = mediaTech::all();
+        $allUsers = Utilisateur::all();
+        $allAdmin = administrateur::all();
+        $services = abonnements::all();
+        $servicesDoc = documents::all();
+        $serviceRn = renseigner::all();
+        $servicesVs = visites::all();
+        $serviceMl = medecine_en_lignes::all();
+
+        $nbPublications = $pub->count();
+        $nbUsers = $allUsers->count();
+        $nbAdmin = $allAdmin->count();
+        $nbServices = $services->count();
+        $nbservicesDoc = $servicesDoc->count();
+        $nbserviceRn = $serviceRn->count();
+        $nbservicesVs = $servicesVs->count();
+        $nbserviceMl = $serviceMl->count();
+
+        return response()->json([
+            'message' => 'Nombre de publications récupéré avec succès',
+            'pub' => $nbPublications,
+            'user' => $nbUsers,
+            'admin'=>$nbAdmin,
+            'abonnement'=>$nbServices,
+            'document'=>$nbservicesDoc,
+            'renseignemnt'=>$nbserviceRn,
+            'visite'=>$nbservicesVs,
+            'medecine'=>$nbserviceMl,
+        ],200);
+    }
+
+
     /**
      * api pour afficher liste de toute les publications de kofa
      */
