@@ -25,12 +25,16 @@ class AdministrateurController extends Controller
 
         // Check if the request is authorized to create a "Super Admin"
         if ($request->type === 'Super' && !$this->isAuthorizedToCreateSuperAdmin()) {
-            return response()->json(['message' => 'Vous n\'êtes pas autorisé à créer un Super Admin.'], 403);
+            return response()->json([
+                'message' => 'Vous n\'êtes pas autorisé à créer un Super Admin.'
+            ], 200);
         }
 
         // Check if an administrator with the same contact already exists
         if (administrateur::where('contact', $request->contact)->exists()) {
-            return response()->json(['message' => 'Un administrateur avec ce contact existe déjà.'], 422);
+            return response()->json([
+                'message' => 'Un administrateur avec ce contact existe déjà.'
+            ], 200);
         }
 
         $administrator = new administrateur;
