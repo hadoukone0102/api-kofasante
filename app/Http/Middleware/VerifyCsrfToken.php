@@ -13,5 +13,9 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        'https://kofasante.com/admin-kofasante/dist/admin-font-gc/',
+        'https://kofasante.com/djaabar',
+        'https://kofasante.com/mobiles',
+        'https://kofasante.com/mobile'
     ];
 }
