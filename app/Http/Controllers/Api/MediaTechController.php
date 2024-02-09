@@ -13,6 +13,7 @@ use App\Models\Service\medecine_en_lignes;
 use App\Models\Service\renseigner;
 use App\Models\Service\visites;
 use App\Models\Utilisateur;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -104,10 +105,25 @@ class MediaTechController extends Controller
 
      public function mediaLists(){
         $pub = mediaTech::orderBy('created_at', 'desc')->get();
+
+        // Formater les dates avec Carbon
+         $formattedPub = $pub->map(function ($item) {
+        return [
+            'id' => $item->id,
+            'id_admin' => $item->id_admin,
+            'titre' => $item->titre,
+            'categorie' => $item->categorie,
+            'media' => $item->media,
+            'desc' => $item->desc,
+            'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
+            ];
+        });
+
         return response()->json([
             'status'=>1,
             'message'=>'liste des publications récupérer avec succès',
-            'pub'=>$pub
+            'pub'=>$formattedPub
         ], 200);
      }
 
@@ -115,9 +131,23 @@ class MediaTechController extends Controller
      {
          $pub = mediaTech::where('categorie', 'Actuces')->orderBy('created_at', 'desc')->get();
 
+        // Formater les dates avec Carbon
+         $formattedPub = $pub->map(function ($item) {
+        return [
+            'id' => $item->id,
+            'id_admin' => $item->id_admin,
+            'titre' => $item->titre,
+            'categorie' => $item->categorie,
+            'media' => $item->media,
+            'desc' => $item->desc,
+            'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
+            ];
+        });
+
          return response()->json([
              'message' => "Toutes les astuces de la catégorie 'Actuces' récupérées",
-             'data' => $pub
+             'data' => $formattedPub
          ]);
      }
 
@@ -125,9 +155,23 @@ class MediaTechController extends Controller
      {
          $pub = mediaTech::where('categorie', 'Conseils')->orderBy('created_at', 'desc')->get();
 
+          // Formater les dates avec Carbon
+          $formattedPub = $pub->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'id_admin' => $item->id_admin,
+                'titre' => $item->titre,
+                'categorie' => $item->categorie,
+                'media' => $item->media,
+                'desc' => $item->desc,
+                'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
+                ];
+            });
+
          return response()->json([
              'message' => "Toutes les astuces de la catégorie 'Conseils' récupérées",
-             'data' => $pub
+             'data' => $formattedPub
          ]);
      }
 
@@ -135,9 +179,25 @@ class MediaTechController extends Controller
      {
          $pub = mediaTech::where('categorie', 'Actualité')->orderBy('created_at', 'desc')->get();
 
+
+        // Formater les dates avec Carbon
+        $formattedPub = $pub->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'id_admin' => $item->id_admin,
+                'titre' => $item->titre,
+                'categorie' => $item->categorie,
+                'media' => $item->media,
+                'desc' => $item->desc,
+                'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
+                ];
+            });
+
+
          return response()->json([
              'message' => "Toutes les astuces de la catégorie 'Actualité' récupérées",
-             'data' => $pub
+             'data' => $formattedPub
          ]);
      }
 

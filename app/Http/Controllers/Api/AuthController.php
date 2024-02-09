@@ -106,6 +106,13 @@ class AuthController extends Controller
         ], 200);
 }
 
+    // Supprimer un utilisateur
+    public function DeleteUser (string $id){
+
+        $service = Utilisateur::findOrFail($id);
+        $service->delete();
+        return response()->json(null, 204);
+    }
 
 
     // Connexion
@@ -214,6 +221,7 @@ public function resetPassword(Request $request)
         'message' => 'Un e-mail de réinitialisation de mot de passe a été envoyé avec succès.',
     ], 200);
 }
+
 
     /**
      * Display a listing of the resource.

@@ -179,6 +179,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
  Route::get('admin-get', [AdministrateurController::class,'adminGet']);
  Route::get('/all-user', [AuthController::class, 'userAll']);
+ Route::delete('/delete-user/{id}', [AuthController::class, 'DeleteUser']);
     // liste des publications
  Route::post('media',[MediaTechController::class,'mediaCreate']);
  Route::get('media-liste',[MediaTechController::class,'mediaLists']);

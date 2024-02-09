@@ -23,7 +23,6 @@ class SendrapportController extends Controller
         );
     }
 
-
     public function myRapport(Request $request){
         $rapport = Sendrapport::where([
             'nom' => auth()->user()->nom,
@@ -32,11 +31,28 @@ class SendrapportController extends Controller
             'email' => auth()->user()->email,
         ])->orderBy('created_at', 'desc')->get();
 
+        // Formater les dates avec Carbon
+        $formattedPub = $lecture->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'nom' => $item->nom,
+                'prenom' => $item->prenom,
+                'email' => $item->email,
+                'contact' => $item->contact,
+                'nomAdmin' => $item->nomAdmin,
+                'titre' => $item->titre,
+                'desc' => $item->desc,
+                'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
+                ];
+        });
+
         return response()->json([
             'message' => "liste des rapports récupérer avec succès",
-            'data' => $rapport,
+            'data' => $formattedPub,
         ], 200);
     }
+
     /**
      * Store a newly created resource in storage.
      */

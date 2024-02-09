@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\lecture;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class lectureController extends Controller
@@ -30,9 +31,24 @@ class lectureController extends Controller
             'email' => auth()->user()->email,
         ])->orderBy('created_at', 'desc')->get();
 
+        // Formater les dates avec Carbon
+        $formattedPub = $lecture->map(function ($item) {
+            return [
+                'id' => $item->id,
+                'nom' => $item->nom,
+                'prenom' => $item->prenom,
+                'email' => $item->email,
+                'contact' => $item->contact,
+                'nomAdmin' => $item->nomAdmin,
+                'desc' => $item->desc,
+                'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
+                ];
+            });
+
         return response()->json([
             'message' => "liste des lecture récupérer avec succès",
-            'data' => $lecture,
+            'data' => $formattedPub,
         ], 200);
     }
 
