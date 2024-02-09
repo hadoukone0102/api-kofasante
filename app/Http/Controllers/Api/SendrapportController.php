@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sendrapport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SendrapportController extends Controller
@@ -32,7 +33,7 @@ class SendrapportController extends Controller
         ])->orderBy('created_at', 'desc')->get();
 
         // Formater les dates avec Carbon
-        $formattedPub = $lecture->map(function ($item) {
+        $formattedPub = $rapport->map(function ($item) {
             return [
                 'id' => $item->id,
                 'nom' => $item->nom,
