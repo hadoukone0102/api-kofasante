@@ -272,6 +272,17 @@ class MediaTechController extends Controller
         }
      }
 
+     public function update(Request $request, string $id)
+     {
+         //
+         $media = mediaTech::findOrFail($id);
+         $media->update($request->only('desc'));
+         return response()->json([
+             'message' =>"Mise à jour effectuer avec succès",
+             'data'=>$media
+         ], 200);
+     }
+
      /**
       * api pour créer une categorie
       */

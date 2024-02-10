@@ -183,7 +183,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     // liste des publications
  Route::post('media',[MediaTechController::class,'mediaCreate']);
  Route::get('media-liste',[MediaTechController::class,'mediaLists']);
- //Route::put('media-update/{id}',[MediaTechController::class,'mediaUpdate']);
+ Route::put('media-update/{id}',[MediaTechController::class,'update']);
  Route::delete('media-delete/{id}',[MediaTechController::class,'mediaDelete']);
 
         // liste des publications par categorie
