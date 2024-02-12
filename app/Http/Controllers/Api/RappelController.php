@@ -24,17 +24,31 @@ class RappelController extends Controller
          );
     }
 
+    // public function myRappel(Request $request){
+    //     $rappel = rappel::where([
+    //         'nom' => auth()->user()->nom,
+    //         'prenom' => auth()->user()->prenom,
+    //         'contact' =>auth()->user()->contact,
+    //         'email' => auth()->user()->email,
+    //     ])->orderBy('created_at', 'desc')->get();
+
+    //     return response()->json([
+    //         'message' => "la facture de l'utilisateur connecté",
+    //         'data' => $rappel,
+    //     ], 200);
+    // }
+
     public function myRappel(Request $request){
-        $rappel = rappel::where([
+        $rappels = rappel::where([
             'nom' => auth()->user()->nom,
             'prenom' => auth()->user()->prenom,
-            'contact' =>auth()->user()->contact,
+            'contact' => auth()->user()->contact,
             'email' => auth()->user()->email,
-        ])->orderBy('created_at', 'desc')->get();
+        ])->orderBy('created_at', 'desc')->take(3)->get();
 
         return response()->json([
-            'message' => "la facture de l'utilisateur connecté",
-            'data' => $rappel,
+            'message' => "Les trois premiers rappels de l'utilisateur connecté",
+            'data' => $rappels,
         ], 200);
     }
 
