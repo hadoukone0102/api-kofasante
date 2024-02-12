@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('contact');
             $table->string('mot_de_passe');
+            $table->integer('age')->nullable();
+            $table->string('sexe')->nullable();
             $table->string('role');
             $table->rememberToken();
             $table->timestamps();

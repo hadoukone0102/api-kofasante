@@ -19,6 +19,7 @@ class abonnements extends Model
     'email',
     'services',
     'typeServices',
+    'autre',
     'details',
     'type',
     'couts',

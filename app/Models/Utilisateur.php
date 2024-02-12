@@ -14,7 +14,7 @@ class Utilisateur extends Model
     use HasFactory, Notifiable , HasApiTokens;
 
     protected $table = "utilisateurs";
-    protected $fillable = ['nom', 'prenom', 'email','contact', 'mot_de_passe', 'role'];
+    protected $fillable = ['nom', 'prenom', 'email','contact', 'mot_de_passe', 'role','sexe','age'];
 
     public function consultationsEnLigne() {
         return $this->hasMany(ConsultationEnLigne::class, 'utilisateur_id');

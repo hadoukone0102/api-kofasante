@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('nombreVisite');
             $table->string('services');
             $table->string('typeServices');
+            $table->string('autre')->nullable();
             $table->string('details');
             $table->string('type');
             $table->integer('couts');

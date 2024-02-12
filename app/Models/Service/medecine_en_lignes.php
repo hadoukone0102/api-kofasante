@@ -18,6 +18,7 @@ class medecine_en_lignes extends Model
     'email',
     'consultant',
     'tyeConsultation',
+    'autre',
     'dateTot',
     'dateTard',
     'details',

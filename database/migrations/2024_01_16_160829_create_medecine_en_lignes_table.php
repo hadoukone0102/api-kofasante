@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('consultant');
             $table->string('tyeConsultation');
+            $table->string('autre')->nullable();
             $table->dateTime('dateTot');
             $table->dateTime('dateTard');
             $table->string('details');
