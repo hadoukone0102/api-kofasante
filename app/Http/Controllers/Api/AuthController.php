@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\codePassword;
 use App\Models\Utilisateur;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class AuthController extends Controller
                 'nom' => $request->input('nom'),
                 'prenom' => $request->input('prenom'),
                 'contact' => $request->input('contact'),
-                'mot_de_passe' => bcrypt($request->input('mot_de_passe')),
+                'mot_de_passe' => $request->input('mot_de_passe'),
                 'role'=> 'admin'
             ]
         );
@@ -222,6 +223,119 @@ public function resetPassword(Request $request)
     ], 200);
 }
 
+
+/**
+ * Api de recuperation de mot de passe
+ */
+
+    public function RPasword(Request $request){
+        $request->validate([
+            'contact' => 'required',
+        ]);
+
+        $user = Utilisateur::where('contact', $request->contact)->first();
+        if (!$user) {
+            return response()->json([
+                'status' => 0,
+                'message' => 'Utilisateur introuvable',
+            ], 404);
+        }
+        // tu decrypte le mot de passe
+        // et tu m'affiche tous le mot de passe decrypter ainsi que les autre données
+    }
+
+
+
+    public function requestPasswordReset(Request $request)  {
+
+    $request->validate([
+        'contact' => 'required|max:10',
+    ]);
+
+    $user = Utilisateur::where('contact', $request->contact)->first();
+
+    if (!$user) {
+        return response()->json([
+            'status' => 0,
+            'message' => 'Aucun utilisateur trouvé avec ce numéro de téléphone.',
+        ], 404);
+    }
+
+    $verificationCode = mt_rand(1000, 9999); // Générer un code à 4 chiffres
+
+    $verifyIsOk = codePassword::firstOrCreate(
+        [
+            'contact' => $user->contact,
+            'code' => $verificationCode,
+        ]
+    );
+
+    return response()->json([
+        'status' => 1,
+        'code'=>$verifyIsOk,
+        'message' => 'Code de vérification envoyé par SMS.',
+    ], 200);
+
+}
+
+
+public function confirmatioDeCode(Request $request)
+{
+    //
+    $request->validate([
+        'code' => 'required|max:5',
+    ]);
+
+    $code = codePassword::where('code', $request->code)->first();
+    if(!$code){
+        return response()->json([
+            'status' => 0,
+            'message' => 'Impossible code incorrecte',
+        ], 404);
+    }
+
+    return response()->json([
+        'status' => 1,
+        'message' => 'vérification validé',
+        'data'=>$code,
+    ], 200);
+
+}
+
+public function verifyCodeAndResetPassword(Request $request)
+{
+    $request->validate([
+        'contact' => 'required|max:10',
+        'code' => 'required|digits:4',
+        'new_password' => 'required|string|min:8',
+    ]);
+
+    $codeEntry = CodePassword::where('contact', $request->contact)
+        ->where('code', $request->code)
+        ->first();
+
+    if (!$codeEntry) {
+        return response()->json([
+            'status' => 0,
+            'message' => 'Code de vérification invalide.',
+        ], 400);
+    }
+
+    // Le code est valide, réinitialisez le mot de passe
+    $user = Utilisateur::where('contact', $request->contact)->first();
+    $user->update([
+        'mot_de_passe' => bcrypt($request->new_password),
+    ]);
+
+    // Supprimer l'entrée du code après utilisation
+    $codeEntry->delete();
+
+    return response()->json([
+        'status' => 1,
+        'message' => 'Mot de passe réinitialisé avec succès.',
+        'data' => $user,
+    ], 200);
+}
 
     /**
      * Display a listing of the resource.

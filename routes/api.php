@@ -54,6 +54,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Inscription et Connexion utilisateur
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/resset',[AuthController::class, 'requestPasswordReset']);
+Route::post('/verify',[AuthController::class, 'confirmatioDeCode']);
+Route::post('/modification-mdp',[AuthController::class, 'verifyCodeAndResetPassword']);
 // Inscription et connexion d'un administrateur
 Route::post('/admin-register', [AdministrateurController::class, 'register']);
 Route::post('/admin-login', [AdministrateurController::class, 'login']);
