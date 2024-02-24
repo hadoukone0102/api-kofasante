@@ -198,8 +198,8 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
         Route::get('media-liste/actualite',[MediaTechController::class,'actualiteCate']);
         Route::get('media-liste/bilan',[MediaTechController::class,'MediaBilan']);
 // Facturation
-Route::post('/Facture', [FacturationController::class, 'destroy']);
-Route::delete('/Facture/delete/{id}', [FacturationController::class, 'store']);
+Route::post('/Facture', [FacturationController::class, 'store']);
+Route::delete('/Facture/delete/{id}', [FacturationController::class, 'destroy']);
 Route::get('/Facture/liste', [FacturationController::class, 'index']);
 Route::post('/Facture/personnel', [FacturationController::class, 'personnel']);
 Route::put('/Facture/update/{id}', [FacturationController::class, 'update']);
