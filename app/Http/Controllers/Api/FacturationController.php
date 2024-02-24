@@ -110,5 +110,11 @@ class FacturationController extends Controller
     public function destroy(string $id)
     {
         //
+        $analyse = Facturation::findOrFail($id);
+        $analyse->delete();
+        return response()->json([
+            'message' =>"facture supprimer avec succès",
+            null
+        ], 204);
     }
 }

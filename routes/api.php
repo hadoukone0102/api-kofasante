@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\AdministrateurController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\DocumentsController;
 use App\Http\Controllers\Api\FacturationController;
+use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\MedecineEnLigneController;
 use App\Http\Controllers\Api\MediaTechController;
 use App\Http\Controllers\Api\PaiementsController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\lectureController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -57,6 +59,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/resset',[AuthController::class, 'requestPasswordReset']);
 Route::post('/verify',[AuthController::class, 'confirmatioDeCode']);
 Route::post('/modification-mdp',[AuthController::class, 'verifyCodeAndResetPassword']);
+Route::post('/SMS',[ForgotPasswordController::class,'ForgotPassword']);
 // Inscription et connexion d'un administrateur
 Route::post('/admin-register', [AdministrateurController::class, 'register']);
 Route::post('/admin-login', [AdministrateurController::class, 'login']);
@@ -195,7 +198,8 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
         Route::get('media-liste/actualite',[MediaTechController::class,'actualiteCate']);
         Route::get('media-liste/bilan',[MediaTechController::class,'MediaBilan']);
 // Facturation
-Route::post('/Facture', [FacturationController::class, 'store']);
+Route::post('/Facture', [FacturationController::class, 'destroy']);
+Route::delete('/Facture/delete/{id}', [FacturationController::class, 'store']);
 Route::get('/Facture/liste', [FacturationController::class, 'index']);
 Route::post('/Facture/personnel', [FacturationController::class, 'personnel']);
 Route::put('/Facture/update/{id}', [FacturationController::class, 'update']);
