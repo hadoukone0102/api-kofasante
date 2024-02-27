@@ -25,7 +25,7 @@ class documents extends Model
     "details",
     "type",
     "couts",
-    "status"
-
+    "status",
+    'prog'
     ];
 }

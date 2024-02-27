@@ -24,6 +24,6 @@ class medecine_en_lignes extends Model
     'details',
     'type',
     'couts',
-    'status'
+    'status',
     ];
 }

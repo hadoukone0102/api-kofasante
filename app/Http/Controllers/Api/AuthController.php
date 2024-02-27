@@ -49,7 +49,9 @@ class AuthController extends Controller
                 'nom' => $request->input('nom'),
                 'prenom' => $request->input('prenom'),
                 'contact' => $request->input('contact'),
-                'mot_de_passe' => $request->input('mot_de_passe'),
+                'mot_de_passe' => bcrypt($request->input('mot_de_passe')),
+                'age' => $request->input('age'),  // Ajouter cela
+                'sexe' => $request->input('sexe'),  // Ajouter cela
                 'role'=> 'admin'
             ]
         );
