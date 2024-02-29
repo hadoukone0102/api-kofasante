@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('contact');
             $table->string('email');
-            $table->string('sexe');
-            $table->string('age');
-            $table->string('desc')->nullable();
-            $table->string('conseil')->nullable();
+            $table->string('sexe')->nullable();
+            $table->string('age')->nullable();
+            $table->longText('desc')->nullable();
+            $table->longText('conseil')->nullable();
             $table->timestamps();
         });
     }
