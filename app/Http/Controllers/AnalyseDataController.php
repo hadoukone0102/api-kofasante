@@ -14,7 +14,7 @@ class AnalyseDataController extends Controller
     public function index()
     {
         //
-        $bilan = AnalyseData::orderBy('created_at', 'desc')->paginate(50);
+        $bilan = AnalyseData::orderBy('created_at', 'desc')->get();
 
         return response()->json([
             'message' => 'Liste complète récupérée avec succès',
