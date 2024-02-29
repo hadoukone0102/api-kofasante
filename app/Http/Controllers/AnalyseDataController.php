@@ -126,7 +126,6 @@ class AnalyseDataController extends Controller
         $userEmail = auth()->user()->email;
 
         $bilan = AnalyseData::where('email', trim($userEmail))->orderBy('created_at', 'desc')->first();
-
         // Variables pour les informations de santé
         $poidsInfo = $bilan->poids > 0 ? "Vous pesez $bilan->poids kg" : "";
         $tailleInfo = $bilan->taille > 0 ? "avec une taille de $bilan->taille cm" : "";
@@ -188,8 +187,7 @@ class AnalyseDataController extends Controller
      // ...
 
         $rapport_du_medecin = RapportData::where('email', $userEmail)->orderBy('created_at', 'desc')->take(5)->get();
-
-        if ($rapport_du_medecin->count() > 0 || $rapport_du_medecin->count() < 0) {
+        if ($rapport_du_medecin->count() > 0 || $rapport_du_medecin->count() == 0) {
             // L'utilisateur existe déjà, mettre à jour le rapport existant
             $rapport_medec = RapportData::create([
                 'email' => auth()->user()->email,
@@ -201,6 +199,7 @@ class AnalyseDataController extends Controller
                 'desc' => $messageAdmin,
                 'conseil' => $conseilAdmin,
             ]);
+
         }
         // Formater la date pour chaque rapport médical
         $rapports_formatés = $rapport_du_medecin->map(function ($item) {
