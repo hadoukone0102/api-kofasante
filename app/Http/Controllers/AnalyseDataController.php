@@ -242,6 +242,16 @@ class AnalyseDataController extends Controller
         ], 200);
     }
 
+    public function BilanRapportsDel(string $id)
+    {
+        $lecture = RapportData::findOrFail($id);
+        $lecture->delete();
+        return response()->json([
+            'message' =>"lecture supprimer avec succès",
+            null
+        ], 204);
+    }
+
     /**
      * Update the specified resource in storage.
      */

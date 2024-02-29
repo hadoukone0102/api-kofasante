@@ -212,3 +212,4 @@ Route::post('/Bilan', [AnalyseDataController::class, 'store']);
 Route::post('/Bilan/tech',[AnalyseDataController::class, 'technique']);
 Route::get('/Bilan/liste', [AnalyseDataController::class, 'index']);
 Route::get('/Bilan/Rapport', [AnalyseDataController::class, 'BilanRapports']);
+Route::delete('/Bilan/Rapport/del/{id}', [AnalyseDataController::class, 'BilanRapportsDel']);
