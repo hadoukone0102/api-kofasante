@@ -15,6 +15,7 @@ class AnalyseDataController extends Controller
     public function index()
     {
         //
+
         $bilan = AnalyseData::orderBy('created_at', 'desc')->get();
 
         return response()->json([
@@ -139,9 +140,12 @@ class AnalyseDataController extends Controller
             $tensionAnormale = false;
             $tensionValue = "$bilan->systolique/$bilan->diastolique";
 
-            if ($bilan->systolique < 109 || $bilan->systolique > 119 || $bilan->diastolique < 66 || $bilan->diastolique > 79) {
+            if (($bilan->systolique <= 108 && $bilan->systolique >= 40) || ($bilan->diastolique <= 65 && $bilan->diastolique >= 30)) {
                 $tensionAnormale = true;
                 $conseil = "Votre tension artérielle est trop basse";
+            }elseif($bilan->systolique <= 39 || $bilan->diastolique <= 29 ){
+                $tensionAnormale = true;
+                $conseil = "Attention, les valeurs que vous avez saisies sont incorrectes($tensionValue)";
             }
 
             $tension = "Votre tension artérielle est de $tensionValue";
@@ -186,8 +190,8 @@ class AnalyseDataController extends Controller
 
      // ...
 
-        $rapport_du_medecin = RapportData::where('email', $userEmail)->orderBy('created_at', 'desc')->take(5)->get();
-        if ($rapport_du_medecin->count() > 0 || $rapport_du_medecin->count() == 0) {
+        $rapport_du_medecin = RapportData::where('email', $userEmail)->orderBy('created_at', 'desc')->first();
+            if ($rapport_du_medecin->count() > 0 || $rapport_du_medecin->count() == 0) {
             // L'utilisateur existe déjà, mettre à jour le rapport existant
             $rapport_medec = RapportData::create([
                 'email' => auth()->user()->email,
@@ -202,29 +206,25 @@ class AnalyseDataController extends Controller
 
         }
         // Formater la date pour chaque rapport médical
-        $rapports_formatés = $rapport_du_medecin->map(function ($item) {
-            return [
-                'id' => $item->id,
-                'email' => $item->email,
-                'nom' => $item->nom,
-                'prenom' => $item->prenom,
-                'contact' => $item->contact,
-                'age' => $item->age,
-                'sexe' => $item->sexe,
-                'desc' => $item->desc,
-                'conseil' => $item->conseil,
-                'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
-                'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
-                ];
-        });
+        // Retourner les données sous forme de tableau associatif
+        $rapports_formatés = [
+            'id' => $rapport_du_medecin->id,
+            'email' => $rapport_du_medecin->email,
+            'nom' => $rapport_du_medecin->nom,
+            'prenom' => $rapport_du_medecin->prenom,
+            'contact' => $rapport_du_medecin->contact,
+            'age' => $rapport_du_medecin->age,
+            'sexe' => $rapport_du_medecin->sexe,
+            'desc' => $rapport_du_medecin->desc,
+            'conseil' => $rapport_du_medecin->conseil,
+            'created_at' => Carbon::parse($rapport_du_medecin->created_at)->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::parse($rapport_du_medecin->updated_at)->format('Y-m-d H:i:s'),
+        ];
 
         return response()->json([
             'message' => "Les analyses de l'utilisateur connecté",
             'data' => $rapports_formatés,
-            // 'specialiste' => $messageAdmin,
-            // 'conseil' => $conseilAdmin,
         ], 200);
-
     }
 
 
