@@ -187,22 +187,63 @@ class AnalyseDataController extends Controller
             $messageAdmin = rtrim($messageAdmin, '. ');
         }
 
-     // ...
+        // ...
+        /**
+         *
+        * Quand tu clique sur le boutton ( Générer un rapport )
+        * Je selectionne deux éléments dans la table de façon decroissate en fonction du mail de l'utilisateur connecté
+        * En suite je prend le plus réssent des deux et je vérifie sa date si elle égale à la date d'aujoud'hui ALORS
+        * ........... je modifie les informations ............
+        * SINON
+        *............. je crée un nouveau bilan ..............
+        *
+        */
 
         //$rapport_du_medecin = RapportData::where('email', $userEmail)->orderBy('created_at', 'desc')->take(2)->get();
 
-            // Récupérer les deux rapports les plus récents pour aujourd'hui et la date précédente
-            $today = now()->format('Y-m-d');
-            $yesterday = now()->subDay()->format('Y-m-d');
+        // Récupérer les deux rapports les plus récents pour aujourd'hui et la date précédente
+        $today = now()->format('Y-m-d');
+        $yesterday = now()->subDay()->format('Y-m-d');
 
-            $rapport_du_medecin = RapportData::where('email', $userEmail)
-                ->whereDate('created_at', '>=', $yesterday)
-                ->orderBy('created_at', 'desc')
-                ->take(2)
-                ->get();
+        $rapport_du_medecin = RapportData::where('email', $userEmail)
+            ->whereDate('created_at', '>=', $yesterday)
+            ->orderBy('created_at', 'desc')
+            ->take(2)
+            ->get();
+        // Vérifions si le nombre d'utilisateur selectionner est supprieur à 0
+        if ($rapport_du_medecin->count() > 0) {
+            // Mise à jour du rapport existant (le premier rapport trouvé)
+            $rapport_medec = $rapport_du_medecin[0];
 
-            if ($rapport_du_medecin->count() == 0) {
-            // L'utilisateur existe déjà, mettre à jour le rapport existant
+            // Vérifions si $rapport_medec->created_at est égale à la date d'aujoud'hui
+            if($rapport_medec->created_at->toDateString() == $today){
+                    $rapport_medec->update([
+                    'email' => auth()->user()->email,
+                    'nom' => auth()->user()->nom,
+                    'prenom' => auth()->user()->prenom,
+                    'contact' => auth()->user()->contact,
+                    'age' => auth()->user()->age,
+                    'sexe' => auth()->user()->sexe,
+                    'desc' => $messageAdmin,
+                    'conseil' => $conseilAdmin,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+            }else{
+                $rapport_medec = RapportData::create([
+                    'email' => auth()->user()->email,
+                    'nom' => auth()->user()->nom,
+                    'prenom' => auth()->user()->prenom,
+                    'contact' => auth()->user()->contact,
+                    'age' => auth()->user()->age,
+                    'sexe' => auth()->user()->sexe,
+                    'desc' => $messageAdmin,
+                    'conseil' => $conseilAdmin,
+                ]);
+            }
+            // Le nombre d'utilisateur selectionner est égale à zero
+        } else {
+            // L'utilisateur n'a pas de rapport aujourd'hui, créer un nouveau rapport
             $rapport_medec = RapportData::create([
                 'email' => auth()->user()->email,
                 'nom' => auth()->user()->nom,
@@ -213,10 +254,9 @@ class AnalyseDataController extends Controller
                 'desc' => $messageAdmin,
                 'conseil' => $conseilAdmin,
             ]);
-
         }
 
-         // Formater la date pour chaque rapport médical
+         // Formater la date pour chaque rapport médicalLes analyses de l'utilisateur connecté
         // Retourner les données sous forme de tableau associatif
         $rapports_formatés = $rapport_du_medecin->map(function ($rapport) {
             return [
