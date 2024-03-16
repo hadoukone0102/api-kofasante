@@ -138,16 +138,16 @@ class BilanPersonnelControllers extends Controller
             $MassageTs = "Conseil pour votre Tension : Votre tension artérielle est normale.";
             $normalTs = true;
         }elseif(($bilan->systolique <= 139 && $bilan->systolique >= 130) && $bilan->diastolique >= 30){
-            $MessageTs = 'Votre tension artérielle est à la limite de l’hypertension.';
+            $MassageTs = 'Votre tension artérielle est à la limite de l’hypertension.';
             $ConseilTs = "Conseil pour votre Tension : Faites attention à votre alimentation, votre activité physique et votre stress.";
         }elseif(($bilan->systolique <= 159 && $bilan->systolique >= 140) && $bilan->diastolique >= 30){
-            $MessageTs = "Vous souffrez d’hypertension légère.";
+            $MassageTs = "Vous souffrez d’hypertension légère.";
             $ConseilTs = "Conseil pour votre Tension : Consultez votre médecin pour un suivi et un traitement adaptés.";
         }elseif(($bilan->systolique <= 179 && $bilan->systolique >= 160) && $bilan->diastolique >= 30){
-            $MessageTs = "Vous souffrez d’hypertension modérée.";
+            $MassageTs = "Vous souffrez d’hypertension modérée.";
             $ConseilTs = "Conseil pour votre Tension : Consultez votre médecin rapidement pour un traitement efficace.";
         }elseif($bilan->systolique >= 180 && $bilan->diastolique >= 30){
-            $MessageTs = "Vous souffrez d’hypertension sévère.";
+            $MassageTs = "Vous souffrez d’hypertension sévère.";
             $ConseilTs = "Conseil pour votre Tension : Consultez votre médecin en urgence pour éviter des complications graves.";
         }
     }
@@ -279,8 +279,8 @@ class BilanPersonnelControllers extends Controller
         $MessageConclusion .= $MessageIMC . ". ";
     }
 
-    if ($MessageTs != "") {
-        $MessageConclusion .= $MessageTs . ". ";
+    if ($MassageTs != "") {
+        $MessageConclusion .= $MassageTs . ". ";
     }
 
     if ($MessageTemp != "") {
