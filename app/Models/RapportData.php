@@ -20,5 +20,6 @@ class RapportData extends Model
         'age',
         'desc',
         'conseil',
+        'total',
     ];
 }

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('age')->nullable();
             $table->longText('desc')->nullable();
             $table->longText('conseil')->nullable();
+            $table->longText('total')->nullable();
             $table->timestamps();
         });
     }

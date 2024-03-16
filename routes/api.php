@@ -4,6 +4,7 @@ use App\Http\Controllers\AnalyseDataController;
 use App\Http\Controllers\Api\AbonnementController;
 use App\Http\Controllers\Api\AdministrateurController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BilanPersonnelControllers;
 use App\Http\Controllers\Api\DocumentsController;
 use App\Http\Controllers\Api\FacturationController;
 use App\Http\Controllers\Api\ForgotPasswordController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\lectureController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -98,7 +100,8 @@ Route::middleware('auth:sanctum')->group(function () { // ~~~~~~~~~~~~~~~~~~~~~~
      */
         // il faut être connecté pour voir ta facture
     Route::get('/Facture/my', [FacturationController::class, 'MyFacture']);
-    Route::get('/Bilan/my', [AnalyseDataController::class, 'BilanMy']);
+    Route::get('/Bilan/my', [BilanPersonnelControllers::class, 'BilanPersonnel']);
+    Route::get('/Bilan/Personnel', [BilanPersonnelControllers::class, 'BilanPersonnel']);
         // pour voire ces rappel l'utilisateur doit etre connecté
             Route::get('rappels/my', [RappelController::class,'myRappel']);
                 // l'utilisateur doit être connecté avant de pouvoir voir la liste des rapport envover

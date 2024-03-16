@@ -159,6 +159,118 @@ class AnalyseDataController extends Controller
         $glycemie = $bilan->valeurGly > 0 ? "Votre glycémie est de $bilan->valeurGly $bilan->unite" : "";
         $temperature = $bilan->valeurTemp > 0 ? "Votre température corporelle est de $bilan->valeurTemp °C" : "";
 
+        // $MessageIMC = "";
+        // $MassageTs = "";
+        // $MessageTemp = "";
+        // $MessageGly = "";
+
+        /**
+         * ~~~~~~~~~~~~~~~~~~~~~~ IMC ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * Opération pour total des Message d'interpretation d'IMC
+         * 1-> valeurIMC =  $bilan->poids / ($bilan->taille * $bilan->taille )
+         * si  18.5<= valeurIMC <= 24.9 ALORS MessageIMC = " Vous avez un poids normal. "
+         * si valeurIMC < 18.5 ALORS MessageIMC = "Vous etes en sous poids. Conseil :Essayez de prendre du poids de façon saine, en augmentant votre apport calorique et en pratiquant une activité physique adaptée. Consultez un médecin ou un nutritionniste si nécessaire."
+         * si valeurIMC >= 40 ALORS MessageIMC = "Vous souffrez d'obésité morbide. "
+         * si  25<= valeurIMC <= 29.9  ALORS MessageIMC =" Vous êtes en surpoids "
+         * si  30<= valeurIMC <= 34.9  ALORS MessageIMC = " Vous souffrez d'obésité modérée "
+         * si  35<= valeurIMC <= 39.9  ALORS MessageIMC =" Vous souffrez d'obésité sévère
+         *
+         *~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         *
+         *~~~~~~~~~~~~~~~~~~~~~~ TENSION ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * systolic = > $bilan->systolique
+         * diastolic = > $bilan->diastolique
+         * Opération pour total des Message d'interpretation d'IMC
+         * si (systolic <= 39 || diastolic <= 29) ALORS  MassageTs = 'Valeur incorrecte.';
+         * si ((systolic >= 40 && systolic <= 108) && (diastolic >= 30)) ALORS MessageTs = "Votre tension artérielle est trop basse."
+         * si ((systolic >= 109 && systolic <= 119) && (diastolic >= 30)) ALORS MassageTs = 'Votre tension artérielle est idéale.'
+         * si  ((systolic >= 130 && systolic <= 139) && (diastolic >= 30)) ALORS MessageTs = 'Votre tension artérielle est à la limite de l’hypertension.'
+         * si ((systolic >= 140 && systolic <= 159) && (diastolic >= 30)) ALORS MessageTs = "Vous souffrez d’hypertension légère."
+         * si  ((systolic >= 160 && systolic <= 179) && (diastolic >= 30)) ALORS MessageTs = " Vous souffrez d’hypertension modérée."
+         * si (systolic >= 180 && diastolic >= 30) AlORS MessageTs = "Vous souffrez d’hypertension sévère."
+         *
+         **~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         *
+         **~~~~~~~~~~~~~~~~~~~~~~ TEMPERATURE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * Opération pour total des Message d'interpretation de Température
+         * si $bilan->valeurTemp < 36,5 ALORS MessageTemp = "Votre température corporelle est Hypothermie."
+         * si $bilan->valeurTemp > 40 ALORS MessageTemp = "Votre température corporelle est Hyperpyrexie."
+         * si 36.5 <= $bilan->valeurTemp <= 37.2 ALORS MessageTemp = "Votre température corporelle est Normal."
+         * si  37.3 <= $bilan->valeurTemp <= 38  ALORS MessageTemp = "Votre température corporelle est Subfébrile."
+         * si  38.1 <= $bilan->valeurTemp <= 39  ALORS MessageTemp = "Votre température corporelle indique une Fièvre modéreée."
+         * si 39.1 <= $bilan->valeurTemp <= 40  ALORS MessageTemp =  "Votre température corporelle indique une Fièvre élevée."
+         *
+         **~~~~~~~~~~~~~~~~~~~~~~ Glycémie ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * Opération pour total des Message d'interpretation de la Glycémie
+         * si $bilan->unite = "g/L"
+         *
+         *  si $bilan->condition = "À jeun"
+         *      si $bilan->valeurGly < 0.80 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly >1.20 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *  si $bilan->condition = "2 h après le repas"
+         *      si $bilan->valeurGly < 0.94 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly >1.77 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *  si $bilan->condition = "Au coucher"
+         *      si $bilan->valeurGly < 1.05 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly > 1.77 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         * * si $bilan->unite = "mg/dL"
+         *
+         *  si $bilan->condition = "À jeun"
+         *      si 80 <= $bilan->valeurGly < 120 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly >120 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *  si $bilan->condition = "2 h après le repas"
+         *      si 94 <= $bilan->valeurGly < 177 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly >177 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *  si $bilan->condition = "Au coucher"
+         *      si 105 <= $bilan->valeurGly <= 177 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly > 177 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         ** si $bilan->unite = "mmol/L"
+         *
+         *  si $bilan->condition = "À jeun"
+         *      si 4.44 <= $bilan->valeurGly < 6.67 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly >6.67 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *  si $bilan->condition = "2 h après le repas"
+         *      si 5.22 <= $bilan->valeurGly < 9.83 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly >9.83 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *  si $bilan->condition = "Au coucher"
+         *      si 5.83 <= $bilan->valeurGly <= 9.83 ALORS MessageGly = " Vous avez une hypoglycémie. "
+         *      si $bilan->valeurGly > 177 ALORS MessageGly = " Vous avez une hyperglycémie. "
+         *      sinon MessageGly = " Votre glycémie est normale. "
+         *
+         *
+         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~ Message de Conseil ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+         * si tout est normal c'est à dire
+         *      -> MessageIMC = "Vous avez un poids normal."
+         *      -> MessageGly = "Votre glycémie est normale."
+         *      -> MessageTemp = "Votre température corporelle est Normal."
+         *      -> MassageTs = "Votre tension artérielle est idéale."
+         * ALORS
+         *       $conseilAdmin = "
+         *      Au Total : $MessageConclusion \n
+         *      Tout à l'air de bien aller. Continuer à maintenir une bonne hygiène de vie. Toutefois,
+         *      faites-vous consulter si vous remarquez des symptômes inhabituels
+         *  ";
+         *
+         *
+         *
+         */
+
         // le rapport du spécialiste
         $messageAdmin = "";
 
@@ -187,17 +299,36 @@ class AnalyseDataController extends Controller
             $messageAdmin = rtrim($messageAdmin, '. ');
         }
 
-        // ...
-        /**
-         *
-        * Quand tu clique sur le boutton ( Générer un rapport )
-        * Je selectionne deux éléments dans la table de façon decroissate en fonction du mail de l'utilisateur connecté
-        * En suite je prend le plus réssent des deux et je vérifie sa date si elle égale à la date d'aujoud'hui ALORS
-        * ........... je modifie les informations ............
-        * SINON
-        *............. je crée un nouveau bilan ..............
-        *
-        */
+        // Organisation du Message de Conclusion
+        //$MessageConclusion = "";
+
+        // $MessageIMC = "";
+        // $MassageTs = "";
+        // $MessageTemp = "";
+        // $MessageGly = "";
+
+        if ($MessageIMC != "") {
+            $MessageConclusion .= $MessageIMC . ". ";
+        }
+
+        if ($MassageTs != "") {
+            $MessageConclusion .= $MassageTs . ". ";
+        }
+
+        if ($MessageTemp != "") {
+            $MessageConclusion .= $MessageTemp . ". ";
+        }
+
+        if ($MessageGly != "") {
+            $MessageConclusion .= $MessageGly;
+        }
+        // Vérifier si le message est vide, s'il l'est, vous pouvez ajouter un message par défaut
+        if ($MessageConclusion === "") {
+            $MessageConclusion = "Aucune donnée disponible.";
+        } else {
+            // Supprimer le dernier point et l'espace s'il y en a un à la fin du message
+            $MessageConclusion = rtrim($MessageConclusion, '. ');
+        }
 
         //$rapport_du_medecin = RapportData::where('email', $userEmail)->orderBy('created_at', 'desc')->take(2)->get();
 
@@ -273,22 +404,6 @@ class AnalyseDataController extends Controller
                 'updated_at' => Carbon::parse($rapport->updated_at)->format('Y-m-d H:i:s'),
             ];
         });
-
-        // Formater la date pour chaque rapport médical
-        // Retourner les données sous forme de tableau associatif
-        // $rapports_formatés = [
-        //     'id' => $rapport_du_medecin->id,
-        //     'email' => $rapport_du_medecin->email,
-        //     'nom' => $rapport_du_medecin->nom,
-        //     'prenom' => $rapport_du_medecin->prenom,
-        //     'contact' => $rapport_du_medecin->contact,
-        //     'age' => $rapport_du_medecin->age,
-        //     'sexe' => $rapport_du_medecin->sexe,
-        //     'desc' => $rapport_du_medecin->desc,
-        //     'conseil' => $rapport_du_medecin->conseil,
-        //     'created_at' => Carbon::parse($rapport_du_medecin->created_at)->format('Y-m-d H:i:s'),
-        //     'updated_at' => Carbon::parse($rapport_du_medecin->updated_at)->format('Y-m-d H:i:s'),
-        // ];
 
         return response()->json([
             'message' => "Les analyses de l'utilisateur connecté",
