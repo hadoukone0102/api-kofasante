@@ -39,7 +39,7 @@ class BilanPersonnelControllers extends Controller
          * ~~~~~~~~~~~~~~~~~~ OPERATION SUR INFORMATION DE SANTE ~~~~~~~~~~~~~~~~~~~~
          */
         // Variables pour les informations de santé
-        $poidsInfo = $bilan->poids > 0 ? "Vous pesez $bilan->poids kg" : "";
+        $poidsInfo = $bilan->poids > 0 ? "Vous pesez $bilan->poids kg," : "";
         $tailleInfo = $bilan->taille > 0 ? "avec une taille de " . number_format($bilan->taille, 2) . " cm" : "";
         $IMC = $bilan->poids > 0 && $bilan->taille > 0 ? "$poidsInfo $tailleInfo" : "";
         // Vérifions les informations de la tension artérielle
