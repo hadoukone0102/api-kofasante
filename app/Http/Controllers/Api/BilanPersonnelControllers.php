@@ -41,7 +41,7 @@ class BilanPersonnelControllers extends Controller
         // Variables pour les informations de santé
         $poidsInfo = $bilan->poids > 0 ? "Vous pesez $bilan->poids kg," : "";
         $tailleInfo = $bilan->taille > 0 ? "avec une taille de " . number_format($bilan->taille, 2) . " cm" : "";
-        var_dump($tailleInfo);
+        // var_dump($tailleInfo);
         $IMC = $bilan->poids > 0 && $bilan->taille > 0 ? "$poidsInfo $tailleInfo" : "";
         // Vérifions les informations de la tension artérielle
         if ($bilan->systolique > 0 && $bilan->diastolique > 0) {
@@ -126,7 +126,7 @@ class BilanPersonnelControllers extends Controller
     // } else {
 
         $valeurIMC = $bilan->poids / ($bilan->taille * $bilan->taille);
-        var_dump($valeurIMC);
+        // var_dump($valeurIMC);
         if( $valeurIMC >= 18.5 && $valeurIMC <= 24.9){
             $MessageIMC = "Vous avez un poids normal.";
             $normalIMC = true;
