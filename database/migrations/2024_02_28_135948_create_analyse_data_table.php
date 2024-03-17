@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('sexe');
             $table->string('age');
             $table->string('type');
-            $table->string('taille')->nullable();
-            $table->string('poids')->nullable();
+            $table->integer('taille')->nullable();
+            $table->integer('poids')->nullable();
             $table->string('systolique')->nullable();
             $table->string('diastolique')->nullable();
             $table->string('valeurGly')->nullable();
