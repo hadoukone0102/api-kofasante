@@ -100,31 +100,6 @@ class BilanPersonnelControllers extends Controller
     //$valeurIMC =  $bilan->poids / ($bilan->taille * $bilan->taille );
     $normalIMC = false;
 
-    // if (is_numeric($bilan->poids) && is_numeric($bilan->taille)) {
-    //     $valeurIMC = $bilan->poids / ($bilan->taille * $bilan->taille);
-
-    //     if( $valeurIMC >= 18.5 && $valeurIMC <= 24.9){
-    //         $MessageIMC = "Vous avez un poids normal.";
-    //         $normalIMC = true;
-    //     }elseif($valeurIMC < 18.5){
-    //         $MessageIMC = "Vous etes en sous poids.";
-    //         $ConseilIMC ="Conseil pour votre IMC : Essayez de prendre du poids de façon saine, en augmentant votre apport calorique et en pratiquant une activité physique adaptée. Consultez un médecin ou un nutritionniste si nécessaire.";
-    //     }elseif($valeurIMC >= 40){
-    //         $MessageIMC = "Vous souffrez d'obésité morbide.";
-    //         $ConseilIMC ="Conseil pour votre IMC : Suivez un régime alimentaire très hypocalorique, équilibré et varié, sous la supervision d’un médecin ou d’un nutritionniste. Augmentez votre dépense énergétique, en faisant de l’exercice physique adapté à votre condition physique, au moins 60 minutes par jour, 5 jours par semaine. Bénéficiez d’une prise en charge médicale, psychologique et chirurgicale si nécessaire.";
-    //     }elseif($valeurIMC >= 25 && $valeurIMC <= 29.9){
-    //         $MessageIMC ="Vous êtes en surpoids.";
-    //         $ConseilIMC ="Conseil pour votre IMC : Faites attention à votre alimentation, en réduisant les aliments gras, sucrés et salés, et en privilégiant les fruits, les légumes, les céréales complètes et les protéines maigres. Pratiquez une activité physique modérée, au moins 30 minutes par jour, 5 jours par semaine. Consultez un médecin ou un nutritionniste si nécessaire.";
-    //     }elseif($valeurIMC >= 30 && $valeurIMC <= 34.9){
-    //         $MessageIMC = "Vous souffrez d'obésité modérée.";
-    //         $ConseilIMC ="Conseil pour votre IMC : Suivez un régime alimentaire hypocalorique, équilibré et varié, sous la supervision d’un médecin ou d’un nutritionniste. Augmentez votre dépense énergétique, en faisant de l’exercice physique adapté à votre condition physique, au moins 45 minutes par jour, 5 jours par semaine.";
-    //     }elseif($valeurIMC >= 35 && $valeurIMC <= 39.9){
-    //         $MessageIMC ="Vous souffrez d'obésité sévère.";
-    //         $ConseilIMC ="Conseil pour votre IMC : Suivez un régime alimentaire très hypocalorique, équilibré et varié, sous la supervision d’un médecin ou d’un nutritionniste. Augmentez votre dépense énergétique, en faisant de l’exercice physique adapté à votre condition physique, au moins 60 minutes par jour, 5 jours par semaine. Envisagez une prise en charge médicale, psychologique et chirurgicale si nécessaire.";
-    //     }
-    //     // Reste du code pour l'interprétation de l'IMC...
-    // } else {
-
         $valeurIMC = $bilan->poids / ($bilan->taille * $bilan->taille);
         // var_dump($valeurIMC);
         if( ($valeurIMC >= 18.5 && $valeurIMC <= 24.9) || ($valeurIMC >= 18.5 && $valeurIMC < 25) ){
@@ -218,6 +193,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }elseif($bilan->condition == "Au coucher"){
             if($bilan->valeurGly < 1.05){
@@ -228,6 +204,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }
       }elseif($bilan->unite == "mg/dL"){
@@ -240,6 +217,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }elseif($bilan->condition == "2 h après le repas"){
             if($bilan->valeurGly <= 177 && $bilan->valeurGly >= 94){
@@ -250,6 +228,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }elseif($bilan->condition == "Au coucher"){
              if($bilan->valeurGly <= 177 && $bilan->valeurGly >= 105){
@@ -260,6 +239,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : ";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }
       }elseif($bilan->unite == "mmol/L"){
@@ -272,6 +252,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }elseif($bilan->condition == "2 h après le repas"){
             if($bilan->valeurGly <= 9.83 && $bilan->valeurGly >= 5.22){
@@ -282,6 +263,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }elseif($bilan->condition == "Au coucher"){
             if($bilan->valeurGly <= 9.83 && $bilan->valeurGly >= 5.83){
@@ -292,6 +274,7 @@ class BilanPersonnelControllers extends Controller
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
                 $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }
         }
       }
