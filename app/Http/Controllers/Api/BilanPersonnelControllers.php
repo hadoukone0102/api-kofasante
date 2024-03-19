@@ -126,7 +126,6 @@ class BilanPersonnelControllers extends Controller
     // } else {
 
         $valeurIMC = $bilan->poids / ($bilan->taille * $bilan->taille);
-        var_dump($valeurIMC);
         // var_dump($valeurIMC);
         if( ($valeurIMC >= 18.5 && $valeurIMC <= 24.9) || ($valeurIMC >= 18.5 && $valeurIMC < 25) ){
             $MessageIMC = "Vous avez un poids normal.";
