@@ -152,7 +152,7 @@ class BilanPersonnelControllers extends Controller
     //~~~~~~~~~~~~~~~~~~~~~~ TEMPERATURE ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     $normalTemp = false;
      if($bilan->valeurTemp < 36.5){
-        $MessageTemp = "Votre température corporelle est Hypothermie.";
+        $MessageTemp = "Votre température corporelle indique une Hypothermie.";
         $ConseilTemp ="Conseil pour votre Température : Réchauffez-vous progressivement avec des couvertures, des boissons chaudes, un chauffage, etc. Consultez un médecin en urgence si vous avez des symptômes graves.";
      }elseif($bilan->valeurTemp >= 36.5 && $bilan->valeurTemp <= 37.2){
         $MessageTemp = "Votre température corporelle est Normale.";
@@ -167,7 +167,7 @@ class BilanPersonnelControllers extends Controller
         $MessageTemp =  "Votre température corporelle indique une Fièvre élevée.";
         $ConseilTemp ="Conseil pour votre Température : Prenez un antipyrétique, buvez beaucoup d’eau, reposez-vous, évitez les efforts physiques. Consultez un médecin rapidement pour identifier la cause de la fièvre et recevoir un traitement adapté.";
      }if($bilan->valeurTemp > 40){
-        $MessageTemp = "Votre température corporelle est Hyperpyrexie.";
+        $MessageTemp = "Votre température corporelle indique une hyperpyrexie.";
         $ConseilTemp ="Conseil pour votre Température : Consultez un médecin en urgence, car il s’agit d’une situation potentiellement mortelle.";
      }
      //~~~~~~~~~~~~~~~~~~~~~~ Glycémie ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
