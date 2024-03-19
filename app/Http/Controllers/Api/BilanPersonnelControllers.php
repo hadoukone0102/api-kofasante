@@ -210,71 +210,71 @@ class BilanPersonnelControllers extends Controller
       }elseif($bilan->unite == "mg/dL"){
         if($bilan->condition == "À jeun"){
             if($bilan->valeurGly <= 120 && $bilan->valeurGly >= 80){
-                $MessageGly = "Vous avez une hypoglycémie.";
-                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
+                $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }elseif($bilan->valeurGly >120){
                 $MessageGly = "Vous avez une hyperglycémie.";
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
-                $MessageGly = "Votre glycémie est normale.";
-                $normalGly = true;
+                $MessageGly = "Vous avez une hypoglycémie.";
+                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
             }
         }elseif($bilan->condition == "2 h après le repas"){
             if($bilan->valeurGly <= 177 && $bilan->valeurGly >= 94){
-                $MessageGly = "Vous avez une hypoglycémie.";
-                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
+                $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }elseif($bilan->valeurGly >177){
                 $MessageGly = "Vous avez une hyperglycémie.";
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
-                $MessageGly = "Votre glycémie est normale.";
-                $normalGly = true;
+                $MessageGly = "Vous avez une hypoglycémie.";
+                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
             }
         }elseif($bilan->condition == "Au coucher"){
              if($bilan->valeurGly <= 177 && $bilan->valeurGly >= 105){
-                $MessageGly = "Vous avez une hypoglycémie.";
-                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
+                $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }elseif($bilan->valeurGly >177){
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
                 $ConseilGly ="Conseil pour votre Glycémie : ";
             }else{
-                $MessageGly = "Votre glycémie est normale.";
-                $normalGly = true;
+                $MessageGly = "Vous avez une hypoglycémie.";
+                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
             }
         }
       }elseif($bilan->unite == "mmol/L"){
         if($bilan->condition == "À jeun"){
             if($bilan->valeurGly <= 6.67 && $bilan->valeurGly >= 4.44){
-                $MessageGly = "Vous avez une hypoglycémie.";
-                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
+                $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }elseif($bilan->valeurGly >6.67){
                 $MessageGly = "Vous avez une hyperglycémie.";
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
-                $MessageGly = "Votre glycémie est normale.";
-                $normalGly = true;
+                $MessageGly = "Vous avez une hypoglycémie.";
+                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
             }
         }elseif($bilan->condition == "2 h après le repas"){
             if($bilan->valeurGly <= 9.83 && $bilan->valeurGly >= 5.22){
-                $MessageGly = "Vous avez une hypoglycémie.";
-                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
+                $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }elseif($bilan->valeurGly >9.83){
                 $MessageGly = "Vous avez une hyperglycémie.";
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
-                $MessageGly = "Votre glycémie est normale.";
-                $normalGly = true;
+                $MessageGly = "Vous avez une hypoglycémie.";
+                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
             }
         }elseif($bilan->condition == "Au coucher"){
             if($bilan->valeurGly <= 9.83 && $bilan->valeurGly >= 5.83){
-                $MessageGly = "Vous avez une hypoglycémie.";
-                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
+                $MessageGly = "Votre glycémie est normale.";
+                $normalGly = true;
             }elseif($bilan->valeurGly >9.83){
                 $MessageGly = "Vous avez une hyperglycémie.";
                 $ConseilGly ="Conseil pour votre Glycémie : Vérifiez si vous avez des cétones dans les urines ou le sang. Si oui, contactez votre médecin ou votre infirmière. Si non, ajustez votre dose d’insuline ou de médicament, si vous en prenez. Revoyez votre alimentation et votre activité physique.";
             }else{
-                $MessageGly = "Votre glycémie est normale.";
-                $normalGly = true;
+                $MessageGly = "Vous avez une hypoglycémie.";
+                $ConseilGly ="Conseil pour votre Glycémie : Prenez 15 g de glucides rapides, comme du jus, du miel, ou du sucre. Vérifiez votre glycémie 15 minutes plus tard. Si elle est toujours basse, répétez l’opération. Une fois votre glycémie remontée, prenez un repas ou une collation.";
             }
         }
       }
