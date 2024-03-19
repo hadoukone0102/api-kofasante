@@ -126,8 +126,9 @@ class BilanPersonnelControllers extends Controller
     // } else {
 
         $valeurIMC = $bilan->poids / ($bilan->taille * $bilan->taille);
+        var_dump($valeurIMC);
         // var_dump($valeurIMC);
-        if( $valeurIMC >= 18.5 && $valeurIMC <= 24.9){
+        if( ($valeurIMC >= 18.5 && $valeurIMC <= 24.9) || ($valeurIMC >= 18.5 && $valeurIMC < 25) ){
             $MessageIMC = "Vous avez un poids normal.";
             $normalIMC = true;
         }elseif($valeurIMC < 18.5){
@@ -136,13 +137,13 @@ class BilanPersonnelControllers extends Controller
         }elseif($valeurIMC >= 40){
             $MessageIMC = "Vous souffrez d'obésité morbide.";
             $ConseilIMC ="Conseil pour votre IMC : Suivez un régime alimentaire très hypocalorique, équilibré et varié, sous la supervision d’un médecin ou d’un nutritionniste. Augmentez votre dépense énergétique, en faisant de l’exercice physique adapté à votre condition physique, au moins 60 minutes par jour, 5 jours par semaine. Bénéficiez d’une prise en charge médicale, psychologique et chirurgicale si nécessaire.";
-        }elseif($valeurIMC >= 25 && $valeurIMC <= 29.9){
+        }elseif(($valeurIMC >= 25 && $valeurIMC <= 29.9) || ($valeurIMC >= 25 && $valeurIMC < 30)){
             $MessageIMC ="Vous êtes en surpoids.";
             $ConseilIMC ="Conseil pour votre IMC : Faites attention à votre alimentation, en réduisant les aliments gras, sucrés et salés, et en privilégiant les fruits, les légumes, les céréales complètes et les protéines maigres. Pratiquez une activité physique modérée, au moins 30 minutes par jour, 5 jours par semaine. Consultez un médecin ou un nutritionniste si nécessaire.";
-        }elseif($valeurIMC >= 30 && $valeurIMC <= 34.9){
+        }elseif( ($valeurIMC >= 30 && $valeurIMC <= 34.9) || ($valeurIMC >= 30 && $valeurIMC < 35) ){
             $MessageIMC = "Vous souffrez d'obésité modérée.";
             $ConseilIMC ="Conseil pour votre IMC : Suivez un régime alimentaire hypocalorique, équilibré et varié, sous la supervision d’un médecin ou d’un nutritionniste. Augmentez votre dépense énergétique, en faisant de l’exercice physique adapté à votre condition physique, au moins 45 minutes par jour, 5 jours par semaine.";
-        }elseif($valeurIMC >= 35 && $valeurIMC <= 39.9){
+        }elseif( ($valeurIMC >= 35 && $valeurIMC <= 39.9) || ($valeurIMC >= 35 && $valeurIMC < 40)){
             $MessageIMC ="Vous souffrez d'obésité sévère.";
             $ConseilIMC ="Conseil pour votre IMC : Suivez un régime alimentaire très hypocalorique, équilibré et varié, sous la supervision d’un médecin ou d’un nutritionniste. Augmentez votre dépense énergétique, en faisant de l’exercice physique adapté à votre condition physique, au moins 60 minutes par jour, 5 jours par semaine. Envisagez une prise en charge médicale, psychologique et chirurgicale si nécessaire.";
         }
@@ -158,7 +159,7 @@ class BilanPersonnelControllers extends Controller
             $MassageTs = "Votre tension artérielle est idéale.";
             $ConseilTs = "Conseil pour votre Tension : Continuez à adopter un mode de vie sain.";
         }elseif(($bilan->systolique <= 129 && $bilan->systolique >= 120) && $bilan->diastolique >= 30){
-            $MassageTs = "Conseil pour votre Tension : Votre tension artérielle est normale.";
+            $MassageTs = "Votre tension artérielle est normale.";
             $normalTs = true;
         }elseif(($bilan->systolique <= 139 && $bilan->systolique >= 130) && $bilan->diastolique >= 30){
             $MassageTs = 'Votre tension artérielle est à la limite de l’hypertension.';
