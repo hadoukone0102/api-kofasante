@@ -15,11 +15,13 @@ use App\Http\Controllers\Api\RappelController;
 use App\Http\Controllers\Api\rapportDataController;
 use App\Http\Controllers\Api\RenseignerController;
 use App\Http\Controllers\Api\SendrapportController;
+use App\Http\Controllers\Api\types\TypesControllers;
 use App\Http\Controllers\Api\VisitesController;
 use App\Http\Controllers\lectureController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -186,6 +188,15 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
                         Route::apiResource('Rapports',SendrapportController::class);
                         // Interpretation des données saisire
                         Route::apiResource('lecture',lectureController::class);
+                            // type de services
+                            Route::apiResource('Types/service',TypesControllers::class);
+                            Route::get('Types/med/{type}',[TypesControllers::class,'ListeMed']);
+                            Route::get('Types/doc/{type}',[TypesControllers::class,'ListeDoc']);
+                            Route::delete('Types/med/{id}',[TypesControllers::class,'ListeMedDelete']);
+                            Route::delete('Types/doc/{id}',[TypesControllers::class,'ListeDocDelete']);
+                                // Affichage de la liste complète docFonction
+                                Route::get('Types/medecine',[TypesControllers::class,'medFonction']);
+                                Route::get('Types/document',[TypesControllers::class,'docFonction']);
 
  Route::get('categorie/get',[MediaTechController::class,'categorieGet']);
  Route::get('type-get', [AdministrateurController::class,'typeGet']);
@@ -203,6 +214,7 @@ Route::post('/reset-password', [AuthController::class, 'resetPassword']);
         Route::get('media-liste/conseils',[MediaTechController::class,'conseilsCate']);
         Route::get('media-liste/actualite',[MediaTechController::class,'actualiteCate']);
         Route::get('media-liste/bilan',[MediaTechController::class,'MediaBilan']);
+
 // Facturation
 Route::post('/Facture', [FacturationController::class, 'store']);
 Route::delete('/Facture/delete/{id}', [FacturationController::class, 'destroy']);
