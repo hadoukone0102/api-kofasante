@@ -48,6 +48,7 @@ class MediaTechController extends Controller
         $media->categorie = $request->input('categorie');
         $media->media = $filename;
         $media->desc = $request->input('desc');
+        $media->type = $request->input('type');
         $result = $media->save();
         if($result){
             return response()->json([
