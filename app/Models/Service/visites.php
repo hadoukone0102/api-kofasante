@@ -12,5 +12,5 @@ class visites extends Model
 
     protected $table = "visites";
 
-    protected $fillable = ['nom','prenom','contact','email','services','typeServices','details','type','couts','status','autre'];
+    protected $fillable = ['nom','prenom','contact','email','services','typeServices','details','type','couts','status','autre','typeService'];
 }

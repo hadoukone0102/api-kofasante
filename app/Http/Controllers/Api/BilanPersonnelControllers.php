@@ -158,7 +158,7 @@ class BilanPersonnelControllers extends Controller
         $MessageTemp = "Votre température corporelle est Normale.";
         $normalTemp = true;
      }elseif($bilan->valeurTemp >= 37.3 && $bilan->valeurTemp <= 38){
-        $MessageTemp = "Votre température corporelle est Subfébrile.";
+        $MessageTemp = "Votre température corporelle indique un état subfébrile";
         $ConseilTemp ="Conseil pour votre Température : Surveillez votre température et vos symptômes. Prenez un antipyrétique (médicament contre la fièvre) si besoin. Consultez un médecin si la fièvre persiste ou s’aggrave.";
      }elseif($bilan->valeurTemp >= 38.1 && $bilan->valeurTemp <= 39){
         $MessageTemp = "Votre température corporelle indique une Fièvre modéreée.";

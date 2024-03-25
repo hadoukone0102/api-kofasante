@@ -20,6 +20,7 @@ class abonnements extends Model
     'services',
     'typeServices',
     'autre',
+    'typeService',
     'details',
     'type',
     'couts',
