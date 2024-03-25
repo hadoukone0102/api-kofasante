@@ -12,5 +12,5 @@ class mediaTech extends Model
 
     protected $table = "media_teches";
 
-    protected $fillable = ['id_admin','titre','categorie','media','desc'];
+    protected $fillable = ['id_admin','titre','categorie','media','desc','type'];
 }

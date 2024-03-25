@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('titre');
             $table->string('categorie');
             $table->string('media')->nullable();
+            $table->string('type')->nullable();
             $table->longText('desc');
             $table->timestamps();
         });
