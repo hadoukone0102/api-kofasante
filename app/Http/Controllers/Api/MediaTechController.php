@@ -156,7 +156,7 @@ class MediaTechController extends Controller
 
      public function conseilsCate()
      {
-         $pub = mediaTech::where('categorie', 'Conseils')->orderBy('created_at', 'desc')->get();
+         $pub = mediaTech::where('categorie', 'accueil')->orderBy('created_at', 'desc')->get();
 
           // Formater les dates avec Carbon
           $formattedPub = $pub->map(function ($item) {
