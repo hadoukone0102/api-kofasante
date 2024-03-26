@@ -116,6 +116,7 @@ class MediaTechController extends Controller
             'categorie' => $item->categorie,
             'media' => $item->media,
             'desc' => $item->desc,
+            'type'=>$item->type,
             'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
             ];
@@ -141,6 +142,7 @@ class MediaTechController extends Controller
             'categorie' => $item->categorie,
             'media' => $item->media,
             'desc' => $item->desc,
+            'type'=>$item->type,
             'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
             ];
@@ -165,6 +167,7 @@ class MediaTechController extends Controller
                 'categorie' => $item->categorie,
                 'media' => $item->media,
                 'desc' => $item->desc,
+                'type'=>$item->type,
                 'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
                 ];
@@ -190,6 +193,7 @@ class MediaTechController extends Controller
                 'categorie' => $item->categorie,
                 'media' => $item->media,
                 'desc' => $item->desc,
+                'type'=>$item->type,
                 'created_at' => Carbon::parse($item->created_at)->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::parse($item->updated_at)->format('Y-m-d H:i:s'),
                 ];
