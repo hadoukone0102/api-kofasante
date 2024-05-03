@@ -300,12 +300,12 @@ class AnalyseDataController extends Controller
         }
 
         // Organisation du Message de Conclusion
-        //$MessageConclusion = "";
+        $MessageConclusion = "";
 
-        // $MessageIMC = "";
-        // $MassageTs = "";
-        // $MessageTemp = "";
-        // $MessageGly = "";
+         $MessageIMC = "";
+         $MassageTs = "";
+         $MessageTemp = "";
+         $MessageGly = "";
 
         if ($MessageIMC != "") {
             $MessageConclusion .= $MessageIMC . ". ";

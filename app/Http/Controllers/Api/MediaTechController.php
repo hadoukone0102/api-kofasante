@@ -27,7 +27,7 @@ class MediaTechController extends Controller
         $request->validate([
             'titre'=>'required|string|max:255',
             'categorie'=>'required',
-            'media'=>'max:102400',
+            'media'=>'max:100000',
             'desc'=>'required'
         ],[
             'titre.required'=>'le titre est requis',
